@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+    <title>Verimsoft Reporting Services</title>
+<style>
+:root {
+  --blue: #5e72e4;
+  --indigo: #5603ad;
+  --purple: #8965e0;
+  --pink: #f3a4b5;
+  --red: #f5365c;
+  --orange: #fb6340;
+  --yellow: #ffd600;
+  --green: #2dce89;
+  --teal: #11cdef;
+  --cyan: #2bffc6;
+  --white: #fff;
+  --gray: #8898aa;
+  --gray-dark: #32325d;
+  --light: #ced4da;
+  --lighter: #e9ecef;
+  --primary: #5e72e4;
+  --secondary: #f7fafc;
+  --success: #2dce89;
+  --info: #11cdef;
+  --warning: #fb6340;
+  --danger: #f5365c;
+  --light: #adb5bd;
+  --dark: #212529;
+  --default: #172b4d;
+  --white: #fff;
+  --neutral: #fff;
+  --darker: black;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: Open Sans, sans-serif;
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Open Sans, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  text-align: left;
+  color: #ffffff;
+  background: #184e69 !important;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  text-align:center;
+  
+}
+
+.item {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  width: 148px;
+}
+
+input[type="date"],
+input[type="button"] {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #525f7f;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+button {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: none;
+  border-radius: .25rem;
+  cursor: pointer;
+  color: #fff;
+  background-color: #fb6340;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+  margin-bottom: 1.5rem;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: #ced4da;
+}
+
+button:hover {
+  background-color: #5603ad;
+}
+h1 {
+  margin-top: 27px;
+  margin-bottom: 24px;
+  text-align: center;
+  font-size: 1.5em;
+}
+h5 {
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    color: #32325d;
+	text-align: center;
+	margin-top: 0px;
+}
+</style>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+	<div style="text-align:center !important;margin-top: 25px;"><img src="https://birimsoft.com/ckfinder/userfiles/images/1.png" alt="v3Logo" style="width: 100px;text-align: center;"></div>
+    <h1>V3 Reporting Services</h1>
+	<hr>
+	</br>
+        <div class="item">
+            <form method="POST" action="/results">
+				
+                <label for="start-date">Başlangıç Tarihi:</label>
+                <input type="date" id="start-date" name="start_date" value="{{ date.today().strftime('%Y-%m-%d') }}" required>
+				</br>
+                <label for="end-date"  >Bitiş Tarihi    :</label>
+                <input type="date" id="end-date" name="end_date" value="{{ date.today().strftime('%Y-%m-%d') }}" required>
+				<div style="padding: 15px;color: #8898aa ;">
+                <button id="results-btn" onclick="openResultsPage()">Günlük Ciro / KPI</button>
+                <button id="test2-btn" disabled>Üretim Raporları</button>
+                <button id="test-btn" disabled>Satın Alma Raporları</button>
+				</div>
+            </form>
+        </div>
+	
+    </div>
+		    <div style="background: #f7fafc;bottom: 1px;height: 20px;position:absolute;left: 0;right: 0;">
+			<h5>Verimsoft Yazılım ve Danışmanlık A.Ş. | ® 2023</h5>
+			</div>	
+    <script>
+        function openResultsPage() {
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/results';
+
+            var startDateInput = document.createElement('input');
+            startDateInput.type = 'hidden';
+            startDateInput.name = 'start_date';
+            startDateInput.value = document.getElementById('start-date').value;
+            form.appendChild(startDateInput);
+
+            var endDateInput = document.createElement('input');
+            endDateInput.type = 'hidden';
+            endDateInput.name = 'end_date';
+            endDateInput.value = document.getElementById('end-date').value;
+            form.appendChild(endDateInput);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+</html>
